@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const emailRef = useRef('');
@@ -18,6 +18,10 @@ const Login = () => {
 
     const navigateRegister = event => {
         navigate('/register')
+        const name = event.target.name.value;
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+
     }
 
     return (
@@ -43,7 +47,7 @@ const Login = () => {
                     Submit
                 </Button>
             </Form>
-            <p>New to Genius Car? <span className='text-danger' onClick={navigateRegister}>Please Register</span></p>
+            <p>New to Genius Car? <Link to="/register" className='text-danger text-decoration-none' onClick={navigateRegister}>Please Register</Link></p>
         </div>
     );
 };
