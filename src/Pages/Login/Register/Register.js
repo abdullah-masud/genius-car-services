@@ -42,7 +42,7 @@ const Register = () => {
     }
 
     if (user) {
-        console.log.log(user)
+        console.log(user)
     }
 
     return (
