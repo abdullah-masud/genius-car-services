@@ -8,6 +8,7 @@ import SocialLogin from '../SocialLogin/SocialLogin';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import useToken from '../../../hooks/useToken';
 
 const Login = () => {
     const emailRef = useRef('');
@@ -27,12 +28,14 @@ const Login = () => {
 
     const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
 
+    const [token] = useToken(user);
+
     if (loading || sending) {
         return <Loading />
     }
 
-    if (user) {
-        // navigate(from, { replace: true });
+    if (token) {
+        navigate(from, { replace: true });
     }
 
     let errorElement;
@@ -46,9 +49,7 @@ const Login = () => {
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         await signInWithEmailAndPassword(email, password)
-        const { data } = await axios.post('https://shrouded-island-42818.herokuapp.com/login', { email });
-        localStorage.setItem('accessToken', data.accessToken)
-        navigate(from, { replace: true });
+
     }
 
     const navigateRegister = event => {
